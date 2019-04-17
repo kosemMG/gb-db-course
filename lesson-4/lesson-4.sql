@@ -24,7 +24,7 @@ SELECT `departments`.`name`,
 -- 2. Создать функцию, которая найдет менеджера по имени и фамилии.
 delimiter //
 
-CREATE PROCEDURE `employee_search` (first_name VARCHAR(25), surname VARCHAR(30))
+CREATE PROCEDURE `employee_search` (first_name VARCHAR(25), surname VARCHAR(30), position_name VARCHAR(40))
 BEGIN
 	SELECT 
 		`staff`.`name`, 
@@ -34,10 +34,15 @@ BEGIN
 	FROM `staff` 
     LEFT JOIN `departments` ON `staff`.`department_id` = `departments`.`id`
     LEFT JOIN `positions` ON `staff`.`position_id` = `positions`.`id`
-    WHERE `staff`.`name` = first_name AND `staff`.`lastname` = surname;
+    WHERE `staff`.`name` = first_name AND 
+		`staff`.`lastname` = surname AND 
+		`positions`.`name` = position_name;
 END//
 
 delimiter ;
+
+-- проверка работы созданной процедуры
+CALL `employee_search` ('Samuel', 'Kolt', 'Advertising manager');
 
 -- 3. Создать триггер, который при добавлении нового сотрудника будет выплачивать ему вступительный бонус, занося запись об этом в таблицу salary.
 -- создаем таблицу зарплат
