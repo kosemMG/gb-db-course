@@ -6,11 +6,11 @@ SELECT `departments`.`name`, AVG(`salary`) AS 'average salary' FROM  `staff`
 	LEFT JOIN `departments`
 	ON `staff`.`department_id` = `departments`.`id`
 	GROUP BY `department_id`;
--------------------------------------------------------------------------
+-- -----------------------------------------------------------------------
 CREATE VIEW `max_salary` AS
 SELECT `name`, `lastname`, `salary` FROM `staff`
 	WHERE `salary` = (SELECT MAX(`salary`) FROM `staff`);
--------------------------------------------------------------------------
+-- -----------------------------------------------------------------------
 CREATE VIEW `department_list` AS
 SELECT `departments`.`name`, 
 		COUNT(*) AS 'employees number', 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `salaries` (
 	`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `employee_id` INT NOT NULL,
     `salary` FLOAT(11,2) DEFAULT 0
-)
+);
 
 -- создаем триггер
 CREATE TRIGGER `add_entrance_bonus`
