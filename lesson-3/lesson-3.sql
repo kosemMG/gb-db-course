@@ -80,7 +80,7 @@ SELECT `name`, `lastname`, `salary` FROM `staff`
 -- Название таблицы staff пришлось заменить на employees из-за ошибки 1093 (нагуглил).
 DELETE FROM `staff` WHERE `id` = 
 	(SELECT `id` FROM (SELECT * FROM `staff`)  AS `employees` WHERE `salary` = 
-	(SELECT MAX(`salary`) FROM (SELECT * FROM `staff`)  AS `employees`));
+	(SELECT MAX(`salary`) FROM (SELECT * FROM `staff`)  AS `employees`)) LIMIT 1;
 
 -- 4. Посчитать количество сотрудников во всех отделах.
 SELECT COUNT(*) AS 'Employees number' FROM `staff`;
