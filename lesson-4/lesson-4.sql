@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `salaries` (
 CREATE TRIGGER `add_entrance_bonus`
 	AFTER INSERT ON `staff`
 	FOR EACH ROW
-	INSERT INTO `salaries` (`employee_id`, `salary`) VALUES (NEW.`id`, NEW.`salary`);
+	INSERT INTO `salaries` (`employee_id`, bonus) VALUES (NEW.`id`, NEW.`salary`);
 
 -- проверка работы триггера
 INSERT INTO `staff` (`name`, `lastname`, `department_id`, `position_id`, `salary`) 
